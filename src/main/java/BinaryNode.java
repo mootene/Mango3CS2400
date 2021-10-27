@@ -1,4 +1,4 @@
-class BinaryNode<T>
+public class BinaryNode<T>
 {
    private T             data;
    private BinaryNode<T> leftChild;  // Reference to left child
@@ -112,6 +112,20 @@ class BinaryNode<T>
          rightChild.postorderTraverse_binaryNodeMethod();
       System.out.print(data + " ");
    }
+
+   /**
+    * recursive postorder of binary tree rooted at this
+    * @param stringBuilder empty String Builder to output the traversal into
+    */
+   public void postorderTraverse_binaryNodeMethod(StringBuilder stringBuilder)
+   {
+      if (leftChild != null)
+         leftChild.postorderTraverse_binaryNodeMethod(stringBuilder);
+      if (rightChild != null)
+         rightChild.postorderTraverse_binaryNodeMethod(stringBuilder);
+      stringBuilder.append(data);
+      stringBuilder.append(" ");
+   }
    
    /**-------------------------------------------------------------------- 
     * Part of Task 2*/
@@ -121,11 +135,13 @@ class BinaryNode<T>
    public int getHeight_binaryNodeMethod()
    {  
       int height = 1;
+      int rightHeight = 0;
+      int leftHeight = 0;
       if (leftChild != null)
-         height += leftChild.getHeight_binaryNodeMethod();
+         leftHeight += leftChild.getHeight_binaryNodeMethod();
       if (rightChild != null)
-         height += rightChild.getHeight_binaryNodeMethod();
-	   return height;
+         rightHeight += rightChild.getHeight_binaryNodeMethod();
+	   return height + Math.max(rightHeight, leftHeight);
    } // end getHeight
    
    /** -------------------------------------------------------------------- */
