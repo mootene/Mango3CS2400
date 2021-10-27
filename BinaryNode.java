@@ -132,6 +132,7 @@ class BinaryNode<T>
    /** A Recursive Method in the BinaryNode Class  
     * Counts the nodes in the subtree rooted at "this" node.
    @return  The number of nodes in the subtree rooted at "this" node. */
+   //written by Maya Tene
 	public int getNumberOfNodes_binaryNodeMethod()
 	{
 	  int leftNumber = 0;
