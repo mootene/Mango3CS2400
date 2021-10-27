@@ -1,5 +1,3 @@
-package src.main.java;
-
 public interface TreeInterface<T>
 {
    public T getRootData();

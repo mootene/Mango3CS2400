@@ -19,7 +19,7 @@ public class BinaryNodeTest
         assertEquals(7, dataCall.getData());
         assertEquals(13, fullCall.getData());
         assertEquals(emptyCall, fullCall.getLeftChild());
-        assertEquals(dataCall, fullCall.getLeftChild());
+        assertEquals(dataCall, fullCall.getRightChild());
     }
 
     @Test
@@ -43,11 +43,12 @@ public class BinaryNodeTest
     {
         BinaryNode <Integer> left = new BinaryNode<>(8);
         BinaryNode <Integer> newLeft = new BinaryNode<>(2);
-        Binarynode <Integer> right = new BinaryNode<>(3);
+        BinaryNode <Integer> right = new BinaryNode<>(3);
         BinaryNode <Integer> bNode = new BinaryNode(11, left, right);
 
         assertEquals(left, bNode.getLeftChild());
-        assertEquals(newLeft, bNode.setLeftChild());
+        bNode.setLeftChild(newLeft);
+        assertEquals(newLeft, bNode.getLeftChild());
         assertTrue(bNode.hasLeftChild());
     }
 
@@ -56,19 +57,20 @@ public class BinaryNodeTest
     {
         BinaryNode <Integer> left = new BinaryNode<>(8);
         BinaryNode <Integer> newRight = new BinaryNode<>(2);
-        Binarynode <Integer> right = new BinaryNode<>(3);
+        BinaryNode <Integer> right = new BinaryNode<>(3);
         BinaryNode <Integer> bNode = new BinaryNode(11, left, right);
 
         assertTrue(bNode.hasRightChild());
-        assertEquals(3, bNode.getRightChild());
-        assertEquals(2, bNode.getRightChild(bNode.setRightChild()));
+        assertEquals(right, bNode.getRightChild());
+        bNode.setRightChild(newRight);
+        assertEquals(newRight, bNode.getRightChild());
     }
 
     @Test
     void testIsLeaf()
     {
         BinaryNode <Integer> left = new BinaryNode<>(32);
-        Binarynode <Integer> right = new BinaryNode<>(97);
+        BinaryNode <Integer> right = new BinaryNode<>(97);
         BinaryNode <Integer> bNode = new BinaryNode<>(11, left, right);
 
         assertFalse(bNode.isLeaf());
@@ -83,7 +85,7 @@ public class BinaryNodeTest
         BinaryNode <Integer> right = new BinaryNode<>(4);
         BinaryNode <Integer> root = new BinaryNode(0, left, right);
 
-        BinaryNode  <Integer> copy = root.copy();
+        BinaryNode <Integer> copy = root.copy();
 
         assertEquals(root.getData(), copy.getData());
         assertEquals(root.getLeftChild(), copy.getLeftChild());
@@ -95,6 +97,51 @@ public class BinaryNodeTest
     @Test
     void testPostorderTraverse()
     {
-        
+        BinaryNode <Integer> a = new BinaryNode<>(5);
+        BinaryNode <Integer> b = new BinaryNode<>(9);
+        BinaryNode <Integer> c = new BinaryNode<>(8, a, b);
+        BinaryNode <Integer> d = new BinaryNode<>(3);
+        BinaryNode <Integer> e = new BinaryNode<>(875431, c, d);
+
+        StringBuilder postoder = new StringBuilder();
+        e.postorderTraverse_binaryNodeMethod(postoder);
+
+        //TO DO
+    }
+
+    @Test
+    void testGetHeight()
+    {
+        BinaryNode <Integer> a = new BinaryNode<>(7);
+        BinaryNode <Integer> b = new BinaryNode<>(2);
+        BinaryNode <Integer> c = new BinaryNode<>(105, a, b);
+        BinaryNode <Integer> d = new BinaryNode<>(999);
+        BinaryNode <Integer> e = new BinaryNode<>(998, c, d);
+
+        int heightE = e.getHeight_binaryNodeMethod();
+        int heightA = a.getHeight_binaryNodeMethod();
+
+        assertEquals(1, heightA);
+        assertEquals(3, heightE);
+    }
+
+    @Test
+    void testNumberOfNodes()
+    {
+        BinaryNode <Integer> a = new BinaryNode<>(5);
+        BinaryNode <Integer> b = new BinaryNode<>(9);
+        BinaryNode <Integer> c = new BinaryNode<>(8, a, b);
+        BinaryNode <Integer> d = new BinaryNode<>(3);
+        BinaryNode <Integer> e = new BinaryNode<>(875431, c, d);
+        BinaryNode <Integer> f = new BinaryNode<>(27);
+        BinaryNode <Integer> g = new BinaryNode<>(56, e, f);
+
+        int nodesRoot = g.getNumberOfNodes_binaryNodeMethod();
+        int nodesLeft = e.getNumberOfNodes_binaryNodeMethod();
+        int nodesRight = f.getNumberOfNodes_binaryNodeMethod();
+
+        assertEquals(1, nodesRight);
+        assertEquals(5, nodesLeft);
+        assertEquals(7, nodesRoot);
     }
 }
