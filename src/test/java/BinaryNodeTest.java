@@ -1,7 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import java.beans.Transient;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +32,7 @@ public class BinaryNodeTest
     @Test
     void testSetData()
     {
-        BinaryNode <Integer> bNode = new BinaryNode(21);
+        BinaryNode <Integer> bNode = new BinaryNode<>(21);
         assertEquals(21, bNode.getData());
         bNode.setData(23);
         assertEquals(23, bNode.getData());
@@ -44,7 +44,7 @@ public class BinaryNodeTest
         BinaryNode <Integer> left = new BinaryNode<>(8);
         BinaryNode <Integer> newLeft = new BinaryNode<>(2);
         BinaryNode <Integer> right = new BinaryNode<>(3);
-        BinaryNode <Integer> bNode = new BinaryNode(11, left, right);
+        BinaryNode <Integer> bNode = new BinaryNode<>(11, left, right);
 
         assertEquals(left, bNode.getLeftChild());
         bNode.setLeftChild(newLeft);
@@ -58,7 +58,7 @@ public class BinaryNodeTest
         BinaryNode <Integer> left = new BinaryNode<>(8);
         BinaryNode <Integer> newRight = new BinaryNode<>(2);
         BinaryNode <Integer> right = new BinaryNode<>(3);
-        BinaryNode <Integer> bNode = new BinaryNode(11, left, right);
+        BinaryNode <Integer> bNode = new BinaryNode<>(11, left, right);
 
         assertTrue(bNode.hasRightChild());
         assertEquals(right, bNode.getRightChild());
@@ -83,15 +83,15 @@ public class BinaryNodeTest
     {
         BinaryNode <Integer> left = new BinaryNode<>(17);
         BinaryNode <Integer> right = new BinaryNode<>(4);
-        BinaryNode <Integer> root = new BinaryNode(0, left, right);
+        BinaryNode <Integer> root = new BinaryNode<>(0, left, right);
 
         BinaryNode <Integer> copy = root.copy();
 
         assertEquals(root.getData(), copy.getData());
-        assertEquals(root.getLeftChild(), copy.getLeftChild());
-        assertEquals(root.getRightChild(), copy.getRightChild());
+        assertEquals(root.getLeftChild().getData(), copy.getLeftChild().getData());
+        assertEquals(root.getRightChild().getData(), copy.getRightChild().getData());
         root.setLeftChild(right);
-        assertFalse(root.getLeftChild() == copy.getLeftChild());
+        assertNotEquals(root.getLeftChild().getData(), copy.getLeftChild().getData());
     }
 
     @Test
@@ -106,7 +106,7 @@ public class BinaryNodeTest
         StringBuilder postoder = new StringBuilder();
         e.postorderTraverse_binaryNodeMethod(postoder);
 
-        //TO DO
+        assertEquals("5 9 8 3 875431 ", postoder.toString());
     }
 
     @Test

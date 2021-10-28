@@ -1,7 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import java.beans.Transient;
+
 
 import org.junit.jupiter.api.Test;
 
@@ -13,12 +13,15 @@ public class BinaryTreeTest
         BinaryTree <Character> tree1 = new BinaryTree<>();
         BinaryTree <Character> tree2 = new BinaryTree<>('a');
         BinaryTree <Character> tree3 = new BinaryTree<>('b');
-        BinaryTree <Character> tree4 = new BinaryTree<>('c', tree2, tree3);
 
         assertTrue(tree1.isEmpty());
         assertEquals('a', tree2.getRootData());
 
-        //TO DO
+        BinaryTree <Character> tree4 = new BinaryTree<>('c', tree2, tree3);
+
+        assertTrue(tree2.isEmpty());
+        assertEquals('c', tree4.getRootData());
+        assertEquals('a', tree4.getRootNode().getLeftChild().getData());
     }
 
     @Test
@@ -62,18 +65,43 @@ public class BinaryTreeTest
     {
         BinaryTree <Character> tree1 = new BinaryTree<>();
         BinaryTree <Character> tree2 = new BinaryTree<>('a');
+        assertFalse(tree2.isEmpty());
         BinaryTree <Character> tree3 = new BinaryTree<>('b', tree1, tree2);
 
         tree3.clear();
         assertTrue(tree3.isEmpty());
-        assertTrue(tree2.isEmpty());    //ask aba
+        assertTrue(tree2.isEmpty());    
     }
 
-    /*@Test
+    @Test
     void testPostorderTraverse()
     {
+        StringBuilder str = new StringBuilder();
 
-    }*/
+        BinaryTree <Integer> emptyTree = new BinaryTree<>();
+        BinaryTree <Integer> left = new BinaryTree<>(45);
+        BinaryTree <Integer> right = new BinaryTree<>(42);
+        BinaryTree <Integer> full = new BinaryTree<>(76, left, right);
+
+        full.postorderTraverse(full.getRootNode(), str);
+
+        assertEquals("45 42 76 ", str.toString());
+    }
+
+    @Test
+    void testPostorderTraverse_callBinaryNodeMethod()
+    {
+        StringBuilder str = new StringBuilder();
+
+        BinaryTree <Integer> emptyTree = new BinaryTree<>();
+        BinaryTree <Integer> left = new BinaryTree<>(45);
+        BinaryTree <Integer> right = new BinaryTree<>(42);
+        BinaryTree <Integer> full = new BinaryTree<>(76, left, right);
+
+        full.postorderTraverse_callBinaryNodeMethod(str);
+
+        assertEquals("45 42 76 ", str.toString());
+    }
 
    
     @Test
