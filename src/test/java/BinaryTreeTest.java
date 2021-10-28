@@ -102,7 +102,6 @@ public class BinaryTreeTest
 
         assertEquals("45 42 76 ", str.toString());
     }
-
    
     @Test
     void testGetHeight()
@@ -118,4 +117,40 @@ public class BinaryTreeTest
         assertEquals(2, height);
     }
    
+    @Test
+    void testGetHeight_callBinaryNodeMethod()
+    {
+        BinaryTree <Character> tree1 = new BinaryTree<>();
+        BinaryTree <Character> tree2 = new BinaryTree<>('a');
+        BinaryTree <Character> tree3 = new BinaryTree<>('b', tree1, tree2);
+
+        int heightFull = tree3.getHeight_callBinaryNodeMethod();
+        int heightEmpty = tree1.getHeight_callBinaryNodeMethod();
+
+        assertEquals(0, heightEmpty);
+        assertEquals(2,heightFull);
+    }
+
+    @Test
+    void testGetNodes()
+    {
+        BinaryTree <Character> tree1 = new BinaryTree<>('c');
+        BinaryTree <Character> tree2 = new BinaryTree<>('a');
+        BinaryTree <Character> tree3 = new BinaryTree<>('b', tree1, tree2);
+
+        int nodes = tree3.getNumberOfNodes();
+
+        assertEquals(3, nodes);
+    }
+
+    @Test
+    void testGetNumberOfNodes_callBinaryNodeMethod()
+    {
+        BinaryTree <Character> tree1 = new BinaryTree<>('c');
+        BinaryTree <Character> tree2 = new BinaryTree<>('a');
+        BinaryTree <Character> tree3 = new BinaryTree<>('b', tree1, tree2);
+
+        int nodes = tree3.getNumberOfNodes_callBinaryNodeMethod();
+        assertEquals(3, nodes);
+    }
 }
