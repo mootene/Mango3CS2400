@@ -1,6 +1,6 @@
 Mango3CS2400
 ------------
-BinaryTree.java modifications done by Jibriel\
+BinaryTree.java modifications done by Jibriel(jaustarz)\
 BinaryNode.java modifications done by Maya\
 BinaryNodeTest and BinaryTreetest configured by Maya\
 pom.xml configured by Maya\
